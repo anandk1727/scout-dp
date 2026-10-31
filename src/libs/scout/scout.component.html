@@ -1,1 +1,17 @@
-<p>scout works!</p>
+<div id="main">
+  @if (store.status() === 'error') {
+    <app-error-screen (retry)="store.load()" />
+  } @else {
+    <h1 class="font-semibold text-primary-700 md:text-xl mb-4">Near Earth objects</h1>
+
+    <ag-grid-angular
+      [rowData]="store.objects()"
+      class="h-[80vh]"
+      [loading]="store.isLoading()"
+      [getRowId]="getRowId"
+      [columnDefs]="colDefs"
+      [theme]="theme"
+      [defaultColDef]="defaultColDef"
+    />
+  }
+</div>
