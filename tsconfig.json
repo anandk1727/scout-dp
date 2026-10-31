@@ -12,7 +12,13 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
-    "module": "preserve"
+    "module": "preserve",
+    "paths": {
+      "@shared/ui": ["./src/libs/shared/ui/index.ts"],
+      "@scout": ["./src/libs/scout/index.ts"],
+      "@contact": ["./src/libs/contact/index.ts"],
+      "@shared/utils": ["./src/libs/shared/utils/index.ts"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
