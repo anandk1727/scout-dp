@@ -3,6 +3,8 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
 import { customPreset } from '@shared/ui';
+import { API_BASE_URL } from '@shared/utils';
+import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,5 +24,6 @@ export const appConfig: ApplicationConfig = {
         },
       },
     }),
+    { provide: API_BASE_URL, useValue: environment.apiBaseUrl },
   ],
 };
