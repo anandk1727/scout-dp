@@ -2,16 +2,46 @@
   @if (store.status() === 'error') {
     <app-error-screen (retry)="store.load()" />
   } @else {
-    <h1 class="font-semibold text-primary-700 md:text-xl mb-4">Near Earth objects</h1>
+    <h1 class="font-semibold text-primary-700 md:text-xl">Near Earth objects</h1>
+    <div class="flex justify-between py-4">
+      <input
+        pInputText
+        type="search"
+        placeholder="Search objects…"
+        aria-label="Search objects"
+        [value]="quickFilter()"
+        (input)="quickFilter.set($any($event.target).value)"
+      />
+      <button pButton [loading]="store.isLoading()" (click)="store.load()">Refresh</button>
+    </div>
 
     <ag-grid-angular
       [rowData]="store.objects()"
-      class="h-[80vh]"
+      class="h-[70vh]"
       [loading]="store.isLoading()"
       [getRowId]="getRowId"
       [columnDefs]="colDefs"
       [theme]="theme"
       [defaultColDef]="defaultColDef"
+      [quickFilterText]="quickFilter()"
+      (rowClicked)="onRowClicked($event)"
     />
+
+    @if (store.selected(); as obj) {
+      <p-dialog
+        [header]="`Object - ${store.selected()?.designation}`"
+        [modal]="true"
+        [visible]="!!store.selected()"
+        styleClass="w-[90vw] md:w-[60vw]"
+        (visibleChange)="store.select(null)"
+      >
+        <dl class="grid grid-cols-2 gap-x-4 gap-y-2 max-h-[500px] pb-4!">
+          @for (entry of store.selected() | keyvalue; track entry.key) {
+            <dt class="text-muted-color">{{ entry.key }}</dt>
+            <dd>{{ entry.value ?? '—' }}</dd>
+          }
+        </dl>
+      </p-dialog>
+    }
   }
 </div>
