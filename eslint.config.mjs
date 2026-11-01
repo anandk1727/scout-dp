@@ -16,6 +16,7 @@ export default [
       'boundaries/elements': [
         { type: 'ui', pattern: 'src/libs/shared/ui' },
         { type: 'utils', pattern: 'src/libs/shared/utils' },
+        { type: 'types', pattern: 'src/libs/shared/types' },
         { type: 'lib', pattern: 'src/libs/*', capture: ['scope'] },
         { type: 'app', pattern: 'src/app' },
       ],
@@ -34,7 +35,7 @@ export default [
               allow: {
                 to: {
                   file: { path: '**/index.ts' },
-                  element: { types: { anyOf: ['lib', 'ui', 'utils'] } },
+                  element: { types: { anyOf: ['lib', 'ui', 'utils', 'types'] } },
                 },
               },
             },
@@ -53,7 +54,7 @@ export default [
                 {
                   to: {
                     file: { path: '**/index.ts' },
-                    element: { types: { anyOf: ['ui', 'utils'] } },
+                    element: { types: { anyOf: ['ui', 'utils', 'types'] } },
                   },
                 },
               ],

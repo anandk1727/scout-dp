@@ -17,7 +17,8 @@
       "@shared/ui": ["./src/libs/shared/ui/index.ts"],
       "@scout": ["./src/libs/scout/index.ts"],
       "@contact": ["./src/libs/contact/index.ts"],
-      "@shared/utils": ["./src/libs/shared/utils/index.ts"]
+      "@shared/utils": ["./src/libs/shared/utils/index.ts"],
+      "@shared/types": ["./src/libs/shared/types/index.ts"]
     }
   },
   "angularCompilerOptions": {

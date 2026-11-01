@@ -1,1 +1,205 @@
-<p>contact works!</p>
+<div aria-live="polite">
+  @switch (store.status()) {
+    @case ('success') {
+      <p-message severity="success"
+        >Thanks! We'll get back to you within 2 business days.
+      </p-message>
+    }
+    @case ('error') {
+      <p-message severity="error">{{ store.error() }} </p-message>
+    }
+  }
+</div>
+
+<section class="flex flex-col justify-center">
+  <div class="mx-auto w-full max-w-4xl pt-8">
+    <!-- Header -->
+    <div class="max-w-2xl">
+      <h1 class="text-4xl font-bold sm:text-5xl">Contact Us</h1>
+      <p class="mt-4 text-base leading-relaxed text-primary-500 sm:text-lg">
+        Building with shadcn/ui and Tailwind? Ask us about blocks, components, or copy-paste
+        sections—we read every message.
+      </p>
+    </div>
+
+    <!-- Content  -->
+    <div class="mt-12 flex flex-col md:flex-row">
+      <div class="flex-1">
+        <div class="mb-4">
+          <h2 class="text-base font-bold">Corporate office</h2>
+          <p class="mt-3 text-sm leading-6 text-primary-500">
+            1200 Framework Boulevard<br />
+            San Francisco, CA 94102, United States
+          </p>
+        </div>
+
+        <!-- Get in touch -->
+        <div class="mb-4">
+          <h2 class="text-base font-bold">Get in touch</h2>
+          <ul class="mt-4 space-y-3.5 text-sm text-primary-500">
+            <li class="flex items-center gap-3">
+              <i class="pi pi-phone text-primary-500 shrink-0" aria-hidden="true"></i>
+              <span>+1 (555) 010-2400</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="pi pi-envelope text-primary-500 shrink-0" aria-hidden="true"></i>
+              <a href="mailto:hello@shadcnblocks.com" class="hover:underline"
+                >hello@shadcnblocks.com</a
+              >
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="pi pi-globe text-primary-500 shrink-0" aria-hidden="true"></i>
+              <a
+                href="https://shadcnblocks.com"
+                target="_blank"
+                rel="noreferrer"
+                class="hover:underline"
+                >shadcnblocks.com</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Follow us -->
+        <div>
+          <h2 class="text-base font-bold">Follow us</h2>
+          <div class="mt-4 flex items-center gap-5 text-primary-500">
+            <!-- Facebook -->
+            <a href="#" class="transition-colors" aria-label="Facebook">
+              <i class="pi pi-facebook text-xl" aria-hidden="true"></i>
+            </a>
+            <!-- Twitter -->
+            <a href="#" class="transition-colors" aria-label="Twitter">
+              <i class="pi pi-twitter text-xl" aria-hidden="true"></i>
+            </a>
+            <!-- LinkedIn -->
+            <a href="#" class="transition-colors" aria-label="LinkedIn">
+              <i class="pi pi-linkedin text-xl" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Form with Vertical Divider -->
+      <div class="flex-1 py-8 md:pt-0 md:border-l md:border-zinc-200 md:pl-10 lg:pl-14">
+        <h2 class="text-base font-bold">Inquiries</h2>
+
+        <form (submit)="onSubmit()" [formGroup]="form" class="mt-6 space-y-5">
+          <!-- Full Name -->
+          <div>
+            <label for="full-name" class="block text-sm font-medium mb-1">
+              Full name <span class="text-red-500">*</span>
+            </label>
+            <input
+              pInputText
+              formControlName="name"
+              id="full-name"
+              placeholder="Jordan Rivera"
+              class="w-full"
+            />
+            @if (form.get('name')?.touched && form.get('name')?.invalid) {
+              @if (form.get('name')?.hasError('required')) {
+                <p class="text-red-500 text-xs mt-1">Full name is required.</p>
+              } @else if (form.get('name')?.hasError('minlength')) {
+                <p class="text-red-500 text-xs mt-1">Name must be at least 2 characters long.</p>
+              } @else if (form.get('name')?.hasError('maxlength')) {
+                <p class="text-red-500 text-xs mt-1">Name cannot exceed 20 characters.</p>
+              }
+            }
+          </div>
+
+          <!-- Work Email Address -->
+          <div>
+            <label for="email" class="block text-sm font-medium mb-1">
+              Work email address <span class="text-red-500">*</span>
+            </label>
+            <input
+              formControlName="email"
+              pInputText
+              type="email"
+              id="email"
+              placeholder="you@company.com"
+              class="w-full"
+            />
+            @if (form.get('email')?.touched && form.get('email')?.invalid) {
+              @if (form.get('email')?.hasError('required')) {
+                <p class="text-red-500 text-xs mt-1">Email address is required.</p>
+              } @else if (form.get('email')?.hasError('pattern')) {
+                <p class="text-red-500 text-xs mt-1">Please enter a valid email address.</p>
+              }
+            }
+          </div>
+
+          <!-- Company Name -->
+          <div>
+            <label for="company" class="block text-sm font-medium mb-1"> Company name </label>
+            <input
+              formControlName="company"
+              pInputText
+              type="text"
+              id="company"
+              placeholder="Optional"
+              class="w-full"
+            />
+            @if (form.get('company')?.touched && form.get('company')?.invalid) {
+              @if (form.get('company')?.hasError('minlength')) {
+                <p class="text-red-500 text-xs mt-1">
+                  Company name must be at least 2 characters long.
+                </p>
+              } @else if (form.get('company')?.hasError('maxlength')) {
+                <p class="text-red-500 text-xs mt-1">Company name cannot exceed 10 characters.</p>
+              }
+            }
+          </div>
+
+          <!-- Number of Employees -->
+          <div>
+            <label for="employees" class="block text-sm font-medium mb-1">
+              Number of employees
+            </label>
+            <input
+              formControlName="employee_count"
+              pInputText
+              type="text"
+              id="employees"
+              placeholder="e.g. 10–50"
+              class="w-full"
+            />
+            @if (form.get('employee_count')?.touched && form.get('employee_count')?.invalid) {
+              <p class="text-red-500 text-xs mt-1">Please enter a valid employee count.</p>
+            }
+          </div>
+
+          <!-- Your Message -->
+          <div>
+            <label for="message" class="block text-sm font-medium mb-1">
+              Your message <span class="text-red-500">*</span>
+            </label>
+            <textarea
+              formControlName="message"
+              pInputTextarea
+              id="message"
+              rows="4"
+              placeholder="Tell us what you are building..."
+              class="w-full"
+            ></textarea>
+            @if (form.get('message')?.touched && form.get('message')?.invalid) {
+              @if (form.get('message')?.hasError('required')) {
+                <p class="text-red-500 text-xs mt-1">A message is required.</p>
+              }
+            }
+          </div>
+
+          <button
+            pButton
+            type="submit"
+            [loading]="store.status() === 'submitting'"
+            class="w-full md:w-auto"
+          >
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
