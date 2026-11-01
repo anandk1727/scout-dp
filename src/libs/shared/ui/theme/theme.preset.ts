@@ -52,4 +52,32 @@ export const customPreset = definePreset(Aura, {
       },
     },
   },
+  components: {
+    button: {
+      colorScheme: {
+        light: {
+          root: {
+            primary: {
+              background: '{primary.900}',
+              hoverBackground: '{primary.800}',
+              borderColor: '{primary.900}',
+              hoverBorderColor: '{primary.800}',
+              activeBorderColor: '{primary.950}',
+            },
+          },
+        },
+        dark: {
+          root: {
+            primary: {
+              background: '{primary.900}',
+              hoverBackground: '{primary.800}',
+              borderColor: '{primary.900}',
+              hoverBorderColor: '{primary.800}',
+              activeBorderColor: '{primary.950}',
+            },
+          },
+        },
+      },
+    },
+  },
 });

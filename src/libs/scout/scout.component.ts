@@ -1,6 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
-import { ColDef, GetRowIdFunc, RowClickedEvent } from 'ag-grid-community';
+import {
+  CellKeyDownEvent,
+  ColDef,
+  FullWidthCellKeyDownEvent,
+  GetRowIdFunc,
+  RowClickedEvent,
+} from 'ag-grid-community';
 import { scoutStore } from './store/scout.store';
 import { ScoutObject } from './types';
 import { ButtonModule } from 'primeng/button';
@@ -39,5 +45,15 @@ export class ScoutComponent {
   /* update the selected object to store */
   protected onRowClicked(event: RowClickedEvent<ScoutObject>) {
     this.store.select(event.data?.designation ?? null);
+  }
+
+  protected onCellKeyDown(
+    e: CellKeyDownEvent<ScoutObject, any, any> | FullWidthCellKeyDownEvent<ScoutObject, any>,
+  ) {
+    const keyboardEvent = e.event as KeyboardEvent;
+
+    if (keyboardEvent.key === 'Enter') {
+      this.onRowClicked(e as unknown as RowClickedEvent);
+    }
   }
 }

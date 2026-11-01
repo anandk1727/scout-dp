@@ -1,4 +1,4 @@
-<div id="main">
+<div>
   @if (store.status() === 'error') {
     <app-error-screen (retry)="store.load()" />
   } @else {
@@ -11,11 +11,20 @@
         aria-label="Search objects"
         [value]="quickFilter()"
         (input)="quickFilter.set($any($event.target).value)"
+        [attr.aria-busy]="store.isLoading()"
       />
-      <button pButton [loading]="store.isLoading()" (click)="store.load()">Refresh</button>
+
+      <button pButton [disabled]="store.isLoading()" (click)="store.load()">
+        @if (store.isLoading()) {
+          Loading...
+        } @else {
+          Refresh
+        }
+      </button>
     </div>
 
     <ag-grid-angular
+      aria-label="Near-Earth objects data table"
       [rowData]="store.objects()"
       class="h-[70vh]"
       [loading]="store.isLoading()"
@@ -25,6 +34,7 @@
       [defaultColDef]="defaultColDef"
       [quickFilterText]="quickFilter()"
       (rowClicked)="onRowClicked($event)"
+      (cellKeyDown)="onCellKeyDown($event)"
     />
 
     @if (store.selected(); as obj) {
