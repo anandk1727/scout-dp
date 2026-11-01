@@ -17,6 +17,7 @@ export default [
         { type: 'ui', pattern: 'src/libs/shared/ui' },
         { type: 'utils', pattern: 'src/libs/shared/utils' },
         { type: 'types', pattern: 'src/libs/shared/types' },
+        { type: 'constants', pattern: 'src/libs/shared/constants' },
         { type: 'lib', pattern: 'src/libs/*', capture: ['scope'] },
         { type: 'app', pattern: 'src/app' },
       ],
@@ -35,7 +36,7 @@ export default [
               allow: {
                 to: {
                   file: { path: '**/index.ts' },
-                  element: { types: { anyOf: ['lib', 'ui', 'utils', 'types'] } },
+                  element: { types: { anyOf: ['lib', 'ui', 'utils', 'types', 'constants'] } },
                 },
               },
             },
@@ -54,7 +55,7 @@ export default [
                 {
                   to: {
                     file: { path: '**/index.ts' },
-                    element: { types: { anyOf: ['ui', 'utils', 'types'] } },
+                    element: { types: { anyOf: ['ui', 'utils', 'types', 'constants'] } },
                   },
                 },
               ],

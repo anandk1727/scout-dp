@@ -18,6 +18,7 @@
       "@scout": ["./src/libs/scout/index.ts"],
       "@contact": ["./src/libs/contact/index.ts"],
       "@shared/utils": ["./src/libs/shared/utils/index.ts"],
+      "@shared/constants": ["./src/libs/shared/constants/index.ts"],
       "@shared/types": ["./src/libs/shared/types/index.ts"]
     }
   },

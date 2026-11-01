@@ -5,7 +5,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { contactStore } from './store/contact.store';
 import { MessageModule } from 'primeng/message';
-import { EMAIL_REGEX } from '@shared/types';
+import { EMAIL_REGEX } from '@shared/constants';
 
 @Component({
   selector: 'app-contact',
