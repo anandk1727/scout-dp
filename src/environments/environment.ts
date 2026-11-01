@@ -1,3 +1,3 @@
 export const environment = {
-  apiBaseUrl: '/api',
+  apiBaseUrl: 'https://scout-proxy.anandkannampulakkl.workers.dev',
 };
